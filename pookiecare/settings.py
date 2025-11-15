@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user',  # Custom user app
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom User Model
+AUTH_USER_MODEL = 'user.User'
+
+# Authentication Backends
+AUTHENTICATION_BACKENDS = [
+    'user.backends.EmailBackend',  # Custom email authentication backend
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+]
+
+# Login/Logout URLs
+LOGIN_URL = 'user:login'
+LOGIN_REDIRECT_URL = 'user:profile'
+LOGOUT_REDIRECT_URL = 'user:login'
+
