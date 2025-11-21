@@ -1,9 +1,8 @@
-# PookieCare User App - Quick Start Guide
+# PookieCare - Quick Start Guide
 
 ## What Has Been Created
 
-A complete Django user management application with:
-
+### User Management Application
 ✅ Custom User model with all required fields
 ✅ Email-based authentication system
 ✅ Bangladeshi phone number validation
@@ -13,6 +12,16 @@ A complete Django user management application with:
 ✅ Full admin panel integration
 ✅ Comprehensive test suite
 ✅ Beautiful, responsive HTML templates
+
+### Products & E-Commerce Application
+✅ Brand management system
+✅ Category management system
+✅ Product catalog with image support
+✅ Shopping cart functionality
+✅ Order management with automatic stock updates
+✅ Full admin panel for e-commerce operations
+✅ Inventory tracking
+✅ Price management in BDT (৳)
 
 ## Quick Start
 
@@ -194,45 +203,101 @@ python manage.py createsuperuser
 - Must start with "01"
 - Example: 01712345678
 
+## Adding Sample Products
+
+### Via Admin Panel
+
+1. **Add Brands**:
+   - Go to admin → Brands → Add Brand
+   - Examples: CeraVe, The Ordinary, Neutrogena, La Roche-Posay
+
+2. **Add Categories**:
+   - Go to admin → Categories → Add Category
+   - Examples: Moisturizers, Cleansers, Serums, Sunscreens, Toners
+
+3. **Add Products**:
+   - Go to admin → Products → Add Product
+   - Fill in product details
+   - Upload product image (stored in `media/products/images/`)
+   - Set price in BDT
+   - Set available stock
+   - Mark as featured if desired
+
+4. **Create Test Order**:
+   - Go to admin → Orders → Add Order
+   - Select a user
+   - Leave "In cart" checked
+   - Save and add order items inline
+   - Complete order using the admin action
+
 ## Next Steps
 
+### User Features
 1. **Customize Templates**: Edit HTML files in `user/templates/user/`
 2. **Add Email Verification**: Implement email confirmation
 3. **Password Reset**: Add forgot password functionality
 4. **Profile Editing**: Allow users to update their information
-5. **Profile Pictures**: Add image upload for user avatars
+
+### E-Commerce Features
+1. **Product Pages**: Create public-facing product listing and detail pages
+2. **Shopping Cart UI**: Build cart interface for customers
+3. **Checkout Process**: Implement checkout flow with address confirmation
+4. **Payment Integration**: Add payment gateway (bKash, Nagad, SSL Commerz)
+5. **Order Tracking**: Let users view their order history
+6. **Product Search**: Add search and filter functionality
 
 ## File Locations
 
 ```
-user/
-├── models.py          # User model definition
-├── forms.py           # Registration form
-├── views.py           # View functions
-├── admin.py           # Admin configuration
-├── backends.py        # Authentication backend
-├── urls.py            # URL routing
-├── tests.py           # Test suite
-└── templates/user/
-    ├── register.html  # Registration page
-    ├── login.html     # Login page
-    └── profile.html   # Profile page
+pookiecare/
+├── user/
+│   ├── models.py          # User model definition
+│   ├── forms.py           # Registration form
+│   ├── views.py           # View functions
+│   ├── admin.py           # Admin configuration
+│   ├── backends.py        # Authentication backend
+│   ├── urls.py            # URL routing
+│   ├── tests.py           # Test suite
+│   └── templates/user/
+│       ├── register.html  # Registration page
+│       ├── login.html     # Login page
+│       └── profile.html   # Profile page
+├── products/
+│   ├── models.py          # Brand, Category, Product, Order models
+│   ├── admin.py           # E-commerce admin configuration
+│   └── README.md          # Products documentation
+└── media/
+    └── products/
+        └── images/        # Product images storage
 ```
 
 ## Support
 
 For detailed documentation, see:
-- `/home/deucalion/codes/pookiecare/user/README.md`
-- `/home/deucalion/codes/pookiecare/README.md`
+- `user/README.md` - User management documentation
+- `products/README.md` - E-commerce documentation
+- `README.md` - Main project documentation
 
 ## Summary
 
-🎉 **Your user application is complete and ready to use!**
+🎉 **Your e-commerce platform is complete and ready to use!**
 
 The application includes:
+
+### User Management
 - ✅ Custom User model with UUID primary key
 - ✅ All required fields (name, email, phone, address)
 - ✅ Bangladesh-specific phone validation
+- ✅ Email-based authentication
+- ✅ User profile and admin panel
+
+### E-Commerce System
+- ✅ Brand and category management
+- ✅ Product catalog with images
+- ✅ Shopping cart functionality
+- ✅ Order management with stock tracking
+- ✅ Complete admin interface
+- ✅ Price management in BDT (৳)
 - ✅ Email authentication
 - ✅ Complete admin integration
 - ✅ Registration and login pages

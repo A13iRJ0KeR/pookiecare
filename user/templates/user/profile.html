@@ -16,6 +16,37 @@
             min-height: 100vh;
             padding: 20px;
         }
+        .header {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+        .header h1 {
+            color: #667eea;
+            font-size: 32px;
+            margin: 0;
+        }
+        .header-links {
+            display: flex;
+            gap: 20px;
+        }
+        .header-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .header-links a:hover {
+            background: #f0f0f0;
+        }
         .container {
             background: white;
             padding: 40px;
@@ -80,9 +111,55 @@
             background: #e0e0e0;
             color: #333;
         }
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .header-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .header-links a {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .info-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .info-label {
+                width: 100%;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <a href="{% url 'products:home' %}" style="text-decoration: none;">
+            <h1>🧴 PookieCare</h1>
+        </a>
+        <div class="header-links">
+            <a href="{% url 'products:home' %}">Home</a>
+            <a href="{% url 'user:profile' %}">Profile</a>
+            {% if user.is_staff %}
+                <a href="/admin/">Admin</a>
+            {% endif %}
+            <a href="{% url 'user:logout' %}">Logout</a>
+        </div>
+    </div>
+    
     <div class="container">
         <h1>User Profile</h1>
         
@@ -161,8 +238,10 @@
         </div>
         
         <div class="btn-group">
+            {% if user.is_staff %}
+                <a href="/admin/" class="btn btn-secondary">Admin Panel</a>
+            {% endif %}
             <a href="{% url 'user:logout' %}" class="btn btn-primary">Logout</a>
-            <a href="/admin/" class="btn btn-secondary">Admin Panel</a>
         </div>
     </div>
 </body>

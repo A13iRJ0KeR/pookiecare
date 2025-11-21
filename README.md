@@ -1,6 +1,6 @@
-# PookieCare - Healthcare Management System
+# PookieCare - Skincare E-Commerce Platform
 
-A Django-based healthcare management system designed for Bangladesh.
+A Django-based e-commerce platform for selling skincare products in Bangladesh.
 
 ## Project Structure
 
@@ -9,19 +9,26 @@ pookiecare/
 ├── manage.py
 ├── requirements.txt
 ├── README.md
+├── media/                   # User-uploaded files (product images)
+│   └── products/
+│       └── images/
 ├── pookiecare/              # Main project settings
 │   ├── __init__.py
 │   ├── settings.py
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── asgi.py
-└── user/                    # User management application
-    ├── models.py            # Custom User model
-    ├── views.py             # Authentication views
-    ├── forms.py             # Registration forms
-    ├── admin.py             # Admin configuration
-    ├── backends.py          # Email authentication backend
-    └── templates/           # User templates
+├── user/                    # User management application
+│   ├── models.py            # Custom User model
+│   ├── views.py             # Authentication views
+│   ├── forms.py             # Registration forms
+│   ├── admin.py             # Admin configuration
+│   ├── backends.py          # Email authentication backend
+│   └── templates/           # User templates
+└── products/                # Products & orders application
+    ├── models.py            # Product, Brand, Category, Order models
+    ├── admin.py             # E-commerce admin configuration
+    └── README.md            # Products documentation
 ```
 
 ## Applications
@@ -37,6 +44,19 @@ A custom user authentication system with the following features:
 - **Admin Panel Integration** for user management
 
 For detailed documentation, see [user/README.md](user/README.md)
+
+### Products Application
+
+A comprehensive e-commerce system for managing skincare products:
+
+- **Brand Management** - Organize products by brands
+- **Category Management** - Categorize skincare products (e.g., Moisturizers, Cleansers, Serums)
+- **Product Catalog** - Complete product information with images, prices, and inventory
+- **Shopping Cart** - Add products to cart with quantity management
+- **Order Management** - Track orders and automatic stock updates
+- **Featured Products** - Highlight products on the homepage
+
+For detailed documentation, see [products/README.md](products/README.md)
 
 ## Installation
 
@@ -91,10 +111,28 @@ For detailed documentation, see [user/README.md](user/README.md)
 - ✅ Custom user model with UUID primary key
 - ✅ Email-based authentication
 - ✅ Bangladeshi phone number validation
-- ✅ Comprehensive address fields
+- ✅ Comprehensive address fields for delivery
 - ✅ Admin panel integration
 - ✅ User profile page
 - ✅ Registration and login forms
+
+### Product Management
+- ✅ Brand and category organization
+- ✅ Product catalog with images
+- ✅ HTML-supported product descriptions
+- ✅ Price management in BDT (৳)
+- ✅ Inventory/stock tracking
+- ✅ Featured products flag
+- ✅ Image storage system
+
+### Shopping & Orders
+- ✅ Shopping cart functionality
+- ✅ Multiple products per order
+- ✅ Quantity management
+- ✅ Price snapshot at purchase time
+- ✅ Automatic stock updates on order completion
+- ✅ Order history tracking
+- ✅ Admin order management tools
 
 ### User Fields
 - User ID (Auto-generated UUID)
@@ -110,6 +148,7 @@ For detailed documentation, see [user/README.md](user/README.md)
 - **Framework**: Django 5.2.7
 - **Database**: SQLite3 (development)
 - **Python**: 3.x
+- **Image Processing**: Pillow 11.0.0
 - **Authentication**: Custom email-based authentication
 
 ## Configuration
@@ -159,15 +198,27 @@ python manage.py collectstatic
 ## Admin Panel
 
 Access the admin panel at `/admin/` to manage:
+
+### User Management
 - Users (view, create, edit, delete)
 - User permissions and groups
-- Authentication and authorization
-
-The admin interface includes:
 - Custom user creation form with password confirmation
-- Organized fieldsets (Authentication, Personal Info, Address, Permissions)
-- Search and filter capabilities
-- List display with key user information
+- Search and filter by email, name, phone, district
+
+### Product Management
+- Brands and categories
+- Products with image previews
+- Color-coded stock status (Red: Out of Stock, Orange: Low Stock, Green: In Stock)
+- Price display in BDT (৳)
+- Featured products management
+
+### Order Management
+- View all orders (cart and completed)
+- Color-coded order status (🛒 In Cart, ✓ Completed)
+- Inline order items editing
+- Automatic stock validation
+- Bulk order completion actions
+- Order history and analytics
 
 ## Security Features
 
@@ -179,12 +230,28 @@ The admin interface includes:
 
 ## Future Enhancements
 
+### User Features
 - [ ] Password reset functionality
 - [ ] Email verification
 - [ ] User profile editing
-- [ ] Two-factor authentication
+- [ ] Order history page for users
+- [ ] Wishlist functionality
+
+### E-Commerce Features
+- [ ] Product search and filtering
+- [ ] Product reviews and ratings
+- [ ] Payment gateway integration
+- [ ] Order tracking
+- [ ] Discount codes and promotions
+- [ ] Product recommendations
+- [ ] Public-facing product pages
+- [ ] Checkout process
+
+### Technical
 - [ ] API endpoints for mobile app
-- [ ] Additional user roles and permissions
+- [ ] Email notifications for orders
+- [ ] SMS notifications (Bangladesh)
+- [ ] Advanced analytics dashboard
 
 ## Contributing
 
@@ -196,7 +263,11 @@ The admin interface includes:
 
 ## Notes
 
-- This system is specifically designed for Bangladesh
+- This platform is specifically designed for Bangladesh market
 - Phone numbers must follow the format: 01XXXXXXXXX (11 digits)
 - Country field is fixed to "Bangladesh"
-- User ID uses UUID for better security and scalability
+- All prices are in BDT (Bangladeshi Taka - ৳)
+- Product images are stored locally in `media/products/images/`
+- All primary keys use UUID for better security and scalability
+- Shopping cart is implemented as orders with `in_cart=True`
+- Stock is automatically updated when orders are completed
