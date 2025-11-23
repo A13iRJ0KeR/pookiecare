@@ -2,3 +2,4 @@
 pookiecare/__pycache__/
 user/__pycache__/
 *.pyc
+db.sqlite3
