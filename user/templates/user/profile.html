@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - PookieCare</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+        .header h1 {
+            color: #667eea;
+            font-size: 32px;
+            margin: 0;
+        }
+        .header-links {
+            display: flex;
+            gap: 20px;
+        }
+        .header-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .header-links a:hover {
+            background: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .profile-section {
+            margin-bottom: 30px;
+        }
+        .profile-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        .info-row {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            width: 200px;
+        }
+        .info-value {
+            color: #333;
+            flex: 1;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .header-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .header-links a {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .info-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .info-label {
+                width: 100%;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'products:home' %}" style="text-decoration: none;">
+            <h1>🧴 PookieCare</h1>
+        </a>
+        <div class="header-links">
+            <a href="{% url 'products:home' %}">Home</a>
+            <a href="{% url 'user:profile' %}">Profile</a>
+            {% if user.is_staff %}
+                <a href="/admin/">Admin</a>
+            {% endif %}
+            <a href="{% url 'user:logout' %}">Logout</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1>User Profile</h1>
+        
+        <div class="profile-section">
+            <h2>Account Information</h2>
+            <div class="info-row">
+                <div class="info-label">User ID:</div>
+                <div class="info-value">{{ user.user_id }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Member Since:</div>
+                <div class="info-value">{{ user.date_joined|date:"F d, Y" }}</div>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2>Personal Information</h2>
+            <div class="info-row">
+                <div class="info-label">Full Name:</div>
+                <div class="info-value">{{ user.get_full_name }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">First Name:</div>
+                <div class="info-value">{{ user.first_name }}</div>
+            </div>
+            {% if user.middle_name %}
+            <div class="info-row">
+                <div class="info-label">Middle Name:</div>
+                <div class="info-value">{{ user.middle_name }}</div>
+            </div>
+            {% endif %}
+            <div class="info-row">
+                <div class="info-label">Last Name:</div>
+                <div class="info-value">{{ user.last_name }}</div>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2>Contact Information</h2>
+            <div class="info-row">
+                <div class="info-label">Email:</div>
+                <div class="info-value">{{ user.email }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Phone Number:</div>
+                <div class="info-value">{{ user.phone_number }}</div>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2>Address</h2>
+            <div class="info-row">
+                <div class="info-label">House Number:</div>
+                <div class="info-value">{{ user.house_number }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Road Number:</div>
+                <div class="info-value">{{ user.road_number }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Postal Code:</div>
+                <div class="info-value">{{ user.postal_code }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">District:</div>
+                <div class="info-value">{{ user.district }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Country:</div>
+                <div class="info-value">{{ user.country }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Full Address:</div>
+                <div class="info-value">{{ user.get_full_address }}</div>
+            </div>
+        </div>
+        
+        <div class="btn-group">
+            {% if user.is_staff %}
+                <a href="/admin/" class="btn btn-secondary">Admin Panel</a>
+            {% endif %}
+            <a href="{% url 'user:logout' %}" class="btn btn-primary">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
